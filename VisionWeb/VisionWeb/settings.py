@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,12 +32,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # third-party apps
+    'rest_framework',
+    'corsheaders',
+    'djoser',
+    'sort_order_field',
+
+    # local apps
+    'users',
+    'page',
 ]
 
 MIDDLEWARE = [
@@ -49,12 +61,26 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+  'DEFAULT_AUTHENTICATION_CLASSES': (
+      'rest_framework.authentication.SessionAuthentication',
+      'rest_framework.authentication.BasicAuthentication',
+      'rest_framework_simplejwt.authentication.JWTAuthentication',
+  ),
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+}
+
 ROOT_URLCONF = 'VisionWeb.urls'
+
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATES_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +94,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'VisionWeb.wsgi.application'
+
+AUTH_USER_MODEL = "users.CustomUser"
 
 
 # Database
@@ -116,5 +144,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
+SITE_DIR = 'visonweb'
 STATIC_URL = '/static/'
+STATIC_ROOT = "/var/www/" + SITE_DIR + ".com/static/"
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static/"),
+    '/var/www/static/',
+]
