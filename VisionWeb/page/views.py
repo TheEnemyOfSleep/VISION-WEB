@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 
-# Create your views here.
+from page.models import Block
+
+
+class BlockView(ListView):
+    template_name = 'index.html'
+    context_object_name = 'block_list'
+
+    def get_queryset(self):
+        return Block.objects.exclude(sub_block__isnull=True)

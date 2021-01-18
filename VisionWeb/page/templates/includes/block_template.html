@@ -1,0 +1,17 @@
+{% for block in block_list %}
+  <div
+  {% if block.classes %}
+  class="{{ block.classes }}"
+  {% endif %}
+  {% if block.style %}
+  style="{{ block.style }}"
+  {% endif %}
+  >
+    {% if block.sub_block.all|length %}
+      {% include "includes/block_template.html" with block_list=block.sub_block.all|dictsort:"sorting" %}
+    {% endif %}
+    {% for elem in block.elements.all %}
+        {{ elem.content|safe }}
+    {% endfor %}
+  </div>
+{% endfor %}
