@@ -1,17 +1,36 @@
 {% for block in block_list %}
   <div
+  {% if block.id_attr %}
+  id="{{ block.id_attr }}"
+  {% endif %}
   {% if block.classes %}
   class="{{ block.classes }}"
   {% endif %}
-  {% if block.style %}
-  style="{{ block.style }}"
+  {% if block.extra_attrs %}
+  {{ block.extra_attrs }}
   {% endif %}
   >
+    
     {% if block.sub_block.all|length %}
       {% include "includes/block_template.html" with block_list=block.sub_block.all|dictsort:"sorting" %}
     {% endif %}
     {% for elem in block.elements.all %}
         {{ elem.content|safe }}
+        {% if elem.style %}
+          <style>
+            {{ elem.style }}
+          </style>
+        {% endif %}
+        {% if elem.script %}
+          <script>
+            {{ elem.script }}
+          </script>
+        {% endif %}
     {% endfor %}
   </div>
+  {% if block.style %}
+    <style>
+      {{ block.style }}
+    </style>
+  {% endif %}
 {% endfor %}

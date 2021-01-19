@@ -4,10 +4,9 @@ from page.models import (
     Element
 )
 
-admin.site.register(Block)
 admin.site.register(Element)
 
 
-class BlockOptionInline(admin.TabularInline):
-    model = Block
-    fields = ('sorting', 'name')
+@admin.register(Block)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ("id", "name", "note", "sorting")

@@ -8,4 +8,4 @@ class BlockView(ListView):
     context_object_name = 'block_list'
 
     def get_queryset(self):
-        return Block.objects.exclude(sub_block__isnull=True)
+        return Block.objects.exclude(root__isnull=False).order_by('sorting')
