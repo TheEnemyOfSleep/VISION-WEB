@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
@@ -13,8 +13,9 @@ User = get_user_model()
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = get_user_model().objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
+    queryset = get_user_model().objects.all()
     lookup_field = "username"
 
 

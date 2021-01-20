@@ -3,13 +3,13 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import ugettext_lazy as _
 
 from custom_auth.models import User
-from custom_auth.forms import UserCreationForm, UserChangeForm
+from custom_auth.forms import UserCreateForm, UserChangeForm
 
 
 class UserAdmin(BaseUserAdmin):
 
     form = UserChangeForm
-    add_form = UserCreationForm
+    add_form = UserCreateForm
 
     list_display = ('username', 'email', 'is_staff')
     list_filter = ('is_staff',)

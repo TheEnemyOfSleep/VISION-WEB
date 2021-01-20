@@ -6,6 +6,7 @@ from datetime import timedelta
 from django.conf import settings
 from django.db import models
 from django.core import validators
+from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 
@@ -24,6 +25,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         unique=True,
         blank=False
     )
+    
+    date_joined = models.DateTimeField('date joined', default=timezone.now)
+
     is_staff = models.BooleanField(default=False)
 
     is_active = models.BooleanField(default=True)
