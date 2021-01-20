@@ -1,9 +1,9 @@
 from django.urls import path
 
-from page.views import BlockView
+from page.views import index_page
 
 app_name = "block_list"
 
 urlpatterns = [
-    path('', BlockView.as_view(), name='index'),
+    path('', index_page, name='index'),
 ]

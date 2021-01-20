@@ -1,5 +1,4 @@
 from django.db import models
-from sort_order_field import SortOrderField
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -23,9 +22,6 @@ class Block(models.Model):
     # Simple note for understanding what block is this
     note = models.CharField(max_length=150, blank=True)
 
-    def is_root(self, root=None):
-        return len(self.root.all())
-
     class Meta:
         ordering = ['-sorting']
         verbose_name = _('block')
@@ -45,3 +41,4 @@ class Element(models.Model):
 
     def __str__(self):
         return self.name
+
