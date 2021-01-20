@@ -21,4 +21,3 @@ urlpatterns = [
     path('api/v1/auth/', include('custom_auth.urls')),
     path('', include('page.urls')),
 ]
-"Just test"

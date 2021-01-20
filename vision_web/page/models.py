@@ -11,11 +11,11 @@ class Block(models.Model):
         related_name='root',
         symmetrical=False
     )
+    sorting = models.PositiveIntegerField(default=0)
     id_attr = models.CharField(max_length=100, blank=True)
     classes = models.CharField(max_length=200, blank=True)
     extra_attrs = models.TextField(blank=True)
     style = models.TextField(blank=True)
-    sorting = models.PositiveIntegerField(default=0)
 
     # Simple note for understanding what block is this
     note = models.CharField(max_length=150, blank=True)
@@ -32,7 +32,7 @@ class Block(models.Model):
 class Element(models.Model):
 
     name = models.CharField(max_length=100, unique=True)
-    sorting = models.IntegerField(default=0)
+    sorting = models.PositiveIntegerField(default=0)
     content = models.TextField()
     style = models.TextField(blank=True)
     script = models.TextField(blank=True)
