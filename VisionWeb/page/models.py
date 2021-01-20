@@ -1,7 +1,5 @@
 from django.db import models
 
-from django.utils.translation import ugettext_lazy as _
-
 
 class Block(models.Model):
 
@@ -24,8 +22,8 @@ class Block(models.Model):
 
     class Meta:
         ordering = ['-sorting']
-        verbose_name = _('block')
-        verbose_name_plural = _('block')
+        verbose_name = 'block'
+        verbose_name_plural = 'block'
 
     def __str__(self):
         return self.name
