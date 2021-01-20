@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'djoser',
     'sort_order_field',
+    'phonenumber_field',
 
     # local apps
     'users',
@@ -93,8 +94,12 @@ TEMPLATES = [
     },
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_FILE_PATH = '/tmp/app-messages'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'myemail@gmail.com'
+EMAIL_HOST_PASSWORD = 'applicationpassword'
+EMAIL_PORT = 587
 
 WSGI_APPLICATION = 'VisionWeb.wsgi.application'
 
@@ -148,7 +153,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 SITE_DIR = 'visonweb'
-# STATIC_ROOT = "/var/www/" + SITE_DIR + ".com/static/"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
