@@ -43,12 +43,10 @@ INSTALLED_APPS = [
     # third-party apps
     'rest_framework',
     'corsheaders',
-    'djoser',
-    'sort_order_field',
-    'phonenumber_field',
+    'rest_framework.authtoken',
 
     # local apps
-    'users',
+    'custom_auth',
     'page',
 ]
 
@@ -66,7 +64,9 @@ REST_FRAMEWORK = {
   'DEFAULT_AUTHENTICATION_CLASSES': (
       'rest_framework.authentication.SessionAuthentication',
       'rest_framework.authentication.BasicAuthentication',
-      'rest_framework_simplejwt.authentication.JWTAuthentication',
+      'rest_framework.authentication.TokenAuthentication',
+      'custom_auth.backends.JWTAuthentication',
+      
   ),
 }
 
@@ -103,7 +103,7 @@ EMAIL_PORT = 587
 
 WSGI_APPLICATION = 'VisionWeb.wsgi.application'
 
-AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = "custom_auth.User"
 
 
 # Database
