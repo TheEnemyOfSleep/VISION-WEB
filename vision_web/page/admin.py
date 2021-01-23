@@ -1,10 +1,16 @@
 from django.contrib import admin
 from page.models import (
     Block,
-    Element
+    Component,
+    ElementsRel,
+    ButtonElement,
+    LabelElement
 )
 
-admin.site.register(Element)
+admin.site.register(ElementsRel)
+admin.site.register(Component)
+admin.site.register(ButtonElement)
+admin.site.register(LabelElement)
 
 
 @admin.register(Block)
